@@ -3,6 +3,8 @@
 //query selectors
 const addNew = document.querySelector(".addBook")
 const mainBottom = document.querySelector(".main-bottom")
+const dialog = document.querySelector(".popUp")
+
 
 
 //object constructor
@@ -12,7 +14,7 @@ function Book(title, author, pages) {
     this.pages = pages;
 }
 
-//main array
+//main array to populate
 const myLibrary = []
 
 // Ask the user for book information
@@ -24,23 +26,63 @@ function addBookToLibrary() {
     myLibrary.push(newBook)
 }
 
-/* form for the button, still not functioning properly
+//save data function
+
+/*
+let formData = new FormData (formSelect)
+for (let [key, value] of formData.entries()) {
+    myLibrary.push({key, value})
+    
+    }
+*/
+
+ // form for the button, still not functioning properly
 
 addNew.addEventListener("click", () => {
     const form = document.createElement("form");
     form.className = "dynamic-form";
     form.setAttribute("action", "#")
-    form.setAttribute("method", "post")
-    form.innerHTML = `<input type="text" placeholder="Enter text" name="textInput"/> <button type="submit">Submit</button>;`
-    mainBottom.appendChild(form)
-})
-*/
+    form.setAttribute("dialog", "post")
+    form.innerHTML = `<label for="title">Title:</label> <input type="text" id="title"placeholder="Enter text" name="textInput"/> <label for="author">Author:</label><input type="text" id="author" placeholder="Enter text" name="textInput"/> <label for="pages"># of pages:</label><input type="text" id="pages" placeholder="Enter text" name="textInput"/> <button type="submit">Submit</button> <button class="readable" type="toggle">Read</button>`
+    dialog.appendChild(form)
+    dialog.showModal()
+    
+    //submit function
+    form.addEventListener("submit", (event) =>{
+        event.preventDefault();
+    //extract the data
+    const title = form.querySelector ("#title").value
+    const author = form.querySelector ("#author").value 
+    const pages = form.querySelector("#pages").value
 
+    //new variable
+
+    const newBook = new Book(title,author,pages)
+        
+
+    myLibrary.push(newBook);
+
+    dialog.close()
+    dialog.innerHTML =""
+
+    displayBooks ()
+   
+})
+})
+
+//
+const displayedBookTitles = new Set()
 
 // main function that displays books on the page
 function displayBooks() {
+
     for (let i = 0; i < myLibrary.length; i++) {
         const allBooks = myLibrary[i];
+        if (displayedBookTitles.has(allBooks.title)) {
+            continue; // Skip this book if it has already been displayed
+        }
+
+        displayedBookTitles.add(allBooks.title);
         //create parent div
         const card = document.createElement("div")
         card.className = "bookCard"
