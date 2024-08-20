@@ -50,6 +50,7 @@ button:hover{
 .footer {
    
     display: grid;
+    grid-template-rows: 1fr;
     gap:10px;
     grid-template-columns: 1.28fr 1fr;
     
@@ -83,7 +84,7 @@ img {
     height:100%;
     width:70%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 100xp 100px 100px;
 }
 
 .bookCard {
