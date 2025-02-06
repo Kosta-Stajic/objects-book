@@ -6,36 +6,34 @@ const mainBottom = document.querySelector(".main-bottom")
 const dialog = document.querySelector(".popUp")
 
 
+//main array to populate
+const myLibrary = []
 
 //object constructor
-function Book(title, author, pages, read) {
+class Book {
+    constructor (title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
 
 }
-
-//mark books as read
-
-
-
-//main array to populate
-const myLibrary = []
-
+}
 // Ask the user for book information
-function addBookToLibrary() {
+class addBookToLibrary {
+    constructor () {
     const title = prompt("Title")
     const author = prompt("Author")
     const pages = prompt("Pages")
     const newBook = new Book(title, author, pages)
     myLibrary.push(newBook)
+    }
 }
 
 //save data function
 
 
-// form for the button, still not functioning properly
+// form for the button
 
 addNew.addEventListener("click", () => {
     const form = document.createElement("form");
